@@ -42,6 +42,7 @@ export default function (app) {
                     profileLink.click();
                     navigationTray.hidden = false;
                     
+                    // Insert the markup for the left side menu
                     document.getElementById('not_right_side').insertAdjacentHTML('beforebegin', `
                         <div id="left-side" class="ic-app-course-menu list-view">
                             <nav role="navigation" aria-label="Menu Accountnavigatie">
@@ -53,6 +54,7 @@ export default function (app) {
                     
                     let sectionTabs = document.getElementById('section-tabs');
                     
+                    // Loop over each link and generate menu item
                     links.forEach(link => {
                         var listItem = document.createElement('li');
                         var anchor = document.createElement('a');
@@ -63,6 +65,7 @@ export default function (app) {
                         anchor.tabIndex = 0;
                         anchor.textContent = link.textContent;
                         
+                        // Select the current active page
                         if (link.href === window.location.href) {
                             anchor.classList.add('files', 'active');
                             anchor.setAttribute('aria-current', 'page');

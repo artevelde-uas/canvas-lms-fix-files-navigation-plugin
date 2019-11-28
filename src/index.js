@@ -5,6 +5,7 @@ export default function (app) {
         'groups.files',
         'courses.files'
     ], (params, name) => {
+        
         // Fix breadcrumbs
         Promise.all([
             app.addReadyListener('.ic-Layout-contentMain .ic-app-nav-toggle-and-crumbs--files'),
@@ -21,9 +22,30 @@ export default function (app) {
             navToggleAndCrumbs.insertBefore(crumbs, courseMenuToggle.nextSibling);
         });
         
-        // Fix for missing left menu
         if (name === 'profile.files') {
+            var application = document.getElementById('application');
             var profileLink = document.getElementById('global_nav_profile_link');
+            var dashboardLink = document.getElementById('global_nav_dashboard_link');
+            
+            // Fix for current active page in main navigation selection
+            (new MutationObserver(mutationRecords => {
+                var found = mutationRecords.find(element => element.attributeName === 'aria-current' && element.oldValue === null)
+                
+                if (found !== undefined && application.getAttribute('aria-hidden') === null) {
+                    var profileListItem = profileLink.parentNode;
+                    var dashboardListItem = dashboardLink.parentNode;
+                    
+                    profileListItem.classList.add('ic-app-header__menu-list-item--active');
+                    profileListItem.setAttribute('aria-current', 'page');
+                    dashboardListItem.classList.remove('ic-app-header__menu-list-item--active');
+                    dashboardListItem.removeAttribute('aria-current');
+                }
+                
+            })).observe(dashboardLink.parentNode, {
+                attributes: true,
+                attributeFilter: ['aria-current'],
+                attributeOldValue: true
+            });
             
             // Hack to get navigation links:
             // 1. Click on the profile link to render the profile navigation tray
@@ -77,5 +99,6 @@ export default function (app) {
                 });
             });
         }
+        
     });
 }

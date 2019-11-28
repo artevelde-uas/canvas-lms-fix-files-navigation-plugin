@@ -26,22 +26,21 @@ export default function (app) {
             var application = document.getElementById('application');
             var profileLink = document.getElementById('global_nav_profile_link');
             var dashboardLink = document.getElementById('global_nav_dashboard_link');
+            var profileListItem = profileLink.parentNode;
+            var dashboardListItem = dashboardLink.parentNode;
             
             // Fix for current active page in main navigation selection
-            (new MutationObserver(mutationRecords => {
-                var found = mutationRecords.find(element => element.attributeName === 'aria-current' && element.oldValue === null)
+            (new MutationObserver(() => {
+                // Determine if dashboard link is selected
+                if (!dashboardListItem.classList.contains('ic-app-header__menu-list-item--active')) return;
                 
-                if (found !== undefined && application.getAttribute('aria-hidden') === null) {
-                    var profileListItem = profileLink.parentNode;
-                    var dashboardListItem = dashboardLink.parentNode;
-                    
-                    profileListItem.classList.add('ic-app-header__menu-list-item--active');
-                    profileListItem.setAttribute('aria-current', 'page');
-                    dashboardListItem.classList.remove('ic-app-header__menu-list-item--active');
-                    dashboardListItem.removeAttribute('aria-current');
-                }
+                // Change selected item back to profile link 
+                dashboardListItem.classList.remove('ic-app-header__menu-list-item--active');
+                dashboardListItem.removeAttribute('aria-current');
+                profileListItem.classList.add('ic-app-header__menu-list-item--active');
+                profileListItem.setAttribute('aria-current', 'page');
                 
-            })).observe(dashboardLink.parentNode, {
+            })).observe(dashboardListItem, {
                 attributes: true,
                 attributeFilter: ['aria-current'],
                 attributeOldValue: true

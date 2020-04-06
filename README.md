@@ -6,6 +6,12 @@
 
 Plug-in for the [Canvas LMS theme app](https://github.com/artevelde-uas/canvas-lms-app) that fixes some navigation issues on file explorer pages.
 
+#### Before:
+![Example image](docs/example-before.png)
+
+#### After:
+![Example image](docs/example-after.png)
+
 ## Installation
 
 Using NPM:
@@ -28,4 +34,3 @@ canvas.addPlugin(fixFilesNavigationPlugin);
 
 canvas.run();
 ```
-  

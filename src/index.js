@@ -7,19 +7,14 @@ export default function (app) {
     ], (params, name) => {
         
         // Fix breadcrumbs
-        Promise.all([
-            app.addReadyListener('.ic-Layout-contentMain .ic-app-nav-toggle-and-crumbs--files'),
-            app.addReadyListener('.ic-Layout-contentMain .ic-app-nav-toggle-and-crumbs--files + .ic-app-crumbs')
-        ]).then(([navToggleAndCrumbs, crumbs]) => {
+        app.addReadyListener('.ic-Layout-contentMain .ic-app-nav-toggle-and-crumbs--files').then(navToggleAndCrumbs => {
             var wrapper = document.getElementById('wrapper');
-            var courseMenuToggle = document.getElementById('courseMenuToggle');
 
             // Remove class name
             navToggleAndCrumbs.classList.remove('ic-app-nav-toggle-and-crumbs--files');
-            
-            // Move elements back to original location
+
+            // Move breadcrumbs back to original location
             wrapper.insertBefore(navToggleAndCrumbs, wrapper.firstChild);
-            navToggleAndCrumbs.insertBefore(crumbs, courseMenuToggle.nextSibling);
         });
         
         if (name === 'profile.files') {

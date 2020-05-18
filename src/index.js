@@ -4,7 +4,7 @@ export default function ({ router, dom }) {
 
         // Fix breadcrumbs
         dom.onElementReady('.ic-Layout-contentMain .ic-app-nav-toggle-and-crumbs--files').then(navToggleAndCrumbs => {
-            var wrapper = document.getElementById('wrapper');
+            let wrapper = document.getElementById('wrapper');
 
             // Remove class name
             navToggleAndCrumbs.classList.remove('ic-app-nav-toggle-and-crumbs--files');
@@ -14,10 +14,10 @@ export default function ({ router, dom }) {
         });
 
         if (name === 'profile.files') {
-            var profileLink = document.getElementById('global_nav_profile_link');
-            var dashboardLink = document.getElementById('global_nav_dashboard_link');
-            var profileListItem = profileLink.parentNode;
-            var dashboardListItem = dashboardLink.parentNode;
+            let profileLink = document.getElementById('global_nav_profile_link');
+            let dashboardLink = document.getElementById('global_nav_dashboard_link');
+            let profileListItem = profileLink.parentNode;
+            let dashboardListItem = dashboardLink.parentNode;
 
             // Fix for current active page in main navigation selection
             (new MutationObserver(() => {
@@ -47,7 +47,7 @@ export default function ({ router, dom }) {
 
                 // 4. Wait for the links to render
                 dom.onElementReady(navigationTray, '.tray-with-space-for-global-nav ul > li > a').then(element => {
-                    var links = element.parentNode.parentNode.querySelectorAll('a');
+                    let links = element.parentNode.parentNode.querySelectorAll('a');
 
                     // 5. Close and unhide the navigation tray
                     profileLink.click();
@@ -67,8 +67,8 @@ export default function ({ router, dom }) {
 
                     // Loop over each link and generate menu item
                     links.forEach(link => {
-                        var listItem = document.createElement('li');
-                        var anchor = document.createElement('a');
+                        let listItem = document.createElement('li');
+                        let anchor = document.createElement('a');
 
                         listItem.className = 'section';
                         anchor.href = link.getAttribute('href');

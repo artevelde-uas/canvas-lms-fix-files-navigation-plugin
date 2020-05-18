@@ -19,6 +19,9 @@ export default function ({ router, dom }) {
             let profileListItem = profileLink.parentNode;
             let dashboardListItem = dashboardLink.parentNode;
 
+            // Mark the account menu as expanded
+            document.body.classList.add('course-menu-expanded');
+
             // Fix for current active page in main navigation selection
             (new MutationObserver(() => {
                 // Determine if dashboard link is selected
@@ -36,26 +39,30 @@ export default function ({ router, dom }) {
                 attributeOldValue: true
             });
 
-            // Hack to get navigation links:
-            // 1. Click on the profile link to render the profile navigation tray
+            let navigationTray = document.getElementById('nav-tray-portal');
+
+            // Temporarily hide the navigation tray
+            navigationTray.hidden = true;
+
+            // Click on the profile link to render the profile navigation tray
             profileLink.click();
 
-            // 2. Wait for the navigation tray to render
-            dom.onElementReady('#nav-tray-portal').then(navigationTray => {
-                // 3. Hide the navigation tray
-                navigationTray.hidden = true;
+            // Wait for the links to render
+            dom.onElementReady('.profile-tray ul', { root: navigationTray }).then(profileTray => {
+                dom.onElementReady('li > div > a', { root: profileTray }).then(() => {
+                    let links = profileTray.querySelectorAll('li > div > a');
 
-                // 4. Wait for the links to render
-                dom.onElementReady(navigationTray, '.tray-with-space-for-global-nav ul > li > a').then(element => {
-                    let links = element.parentNode.parentNode.querySelectorAll('a');
-
-                    // 5. Close and unhide the navigation tray
+                    // Close the navigation tray
                     profileLink.click();
-                    navigationTray.hidden = false;
+
+                    // Unhide the navigation tray after the transition
+                    setTimeout(() => {
+                        navigationTray.hidden = false;
+                    }, 1000);
 
                     // Insert the markup for the left side menu
                     document.getElementById('not_right_side').insertAdjacentHTML('beforebegin', `
-                        <div id="left-side" class="ic-app-course-menu list-view">
+                        <div id="left-side" class="ic-app-course-menu list-view" style="display: block">
                             <nav role="navigation" aria-label="Menu Accountnavigatie">
                                 <ul id="section-tabs">
                                 </ul>

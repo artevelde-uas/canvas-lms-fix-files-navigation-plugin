@@ -1,13 +1,9 @@
 
-export default function (app) {
-    app.addRouteListener([
-        'profile.files',
-        'groups.files',
-        'courses.files'
-    ], (params, name) => {
+export default function ({ router, dom }) {
+    router.onRoute(['profile.files', 'groups.files', 'courses.files'], (params, name) => {
 
         // Fix breadcrumbs
-        app.addReadyListener('.ic-Layout-contentMain .ic-app-nav-toggle-and-crumbs--files').then(navToggleAndCrumbs => {
+        dom.onElementReady('.ic-Layout-contentMain .ic-app-nav-toggle-and-crumbs--files').then(navToggleAndCrumbs => {
             var wrapper = document.getElementById('wrapper');
 
             // Remove class name
@@ -46,12 +42,12 @@ export default function (app) {
             profileLink.click();
 
             // 2. Wait for the navigation tray to render
-            app.addReadyListener('#nav-tray-portal').then(navigationTray => {
+            dom.onElementReady('#nav-tray-portal').then(navigationTray => {
                 // 3. Hide the navigation tray
                 navigationTray.hidden = true;
 
                 // 4. Wait for the links to render
-                app.addReadyListener(navigationTray, '.tray-with-space-for-global-nav ul > li > a').then(element => {
+                dom.onElementReady(navigationTray, '.tray-with-space-for-global-nav ul > li > a').then(element => {
                     var links = element.parentNode.parentNode.querySelectorAll('a');
 
                     // 5. Close and unhide the navigation tray

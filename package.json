@@ -13,6 +13,6 @@
     "src/index.js"
   ],
   "peerDependencies": {
-    "@ahsdile/canvas-lms-app": "^0.21.0"
+    "@artevelde-uas/canvas-lms-app": "^0.32.0"
   }
 }

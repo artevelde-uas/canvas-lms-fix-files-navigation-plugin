@@ -6,11 +6,30 @@
 
 Plug-in for the [Canvas LMS theme app](https://github.com/artevelde-uas/canvas-lms-app) that fixes some navigation issues on file explorer pages.
 
+## Features
+
+### My Files:
+
+  * Adds the missing account navigation
+  * Adds the missing toggle switch
+  * Selects the 'Account' menu item in the main navigation
+
 #### Before:
-![Example image](docs/example-before.png)
+![Example image](docs/my-files-before.png)
 
 #### After:
-![Example image](docs/example-after.png)
+![Example image](docs/my-files-after.png)
+
+### Course Files:
+
+  * Move the course navigation down
+  * Move the breadcrumbs to the top left
+
+#### Before:
+![Example image](docs/course-files-before.png)
+
+#### After:
+![Example image](docs/course-files-after.png)
 
 ## Installation
 

@@ -14,7 +14,6 @@ export default function ({ router, dom }) {
         });
 
         if (name === 'profile.files') {
-            var application = document.getElementById('application');
             var profileLink = document.getElementById('global_nav_profile_link');
             var dashboardLink = document.getElementById('global_nav_dashboard_link');
             var profileListItem = profileLink.parentNode;

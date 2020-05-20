@@ -46,10 +46,23 @@ Using Yarn:
 Just import the plug-in and add it to the Canvas app:
 
 ```javascript
-import canvas from '@ahsdile/canvas-lms-app';
+import canvas from '@artevelde-uas/canvas-lms-app';
 import fixFilesNavigationPlugin from '@artevelde-uas/canvas-lms-fix-files-navigation-plugin';
+
 
 canvas.addPlugin(fixFilesNavigationPlugin);
 
 canvas.run();
+```
+
+### Options
+
+#### `expandMyFilesMenu`
+
+Gives you the ability to hide the profile menu by default. (Defaults to TRUE.)
+
+```javascript
+canvas.addPlugin(fixFilesNavigationPlugin, {
+    expandMyFilesMenu: false
+});
 ```

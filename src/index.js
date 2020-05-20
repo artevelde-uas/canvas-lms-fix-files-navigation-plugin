@@ -1,5 +1,5 @@
 
-export default function ({ router, dom }) {
+export default function ({ router, dom }, { expandMyFilesMenu = true } = {}) {
     router.onRoute(['profile.files', 'groups.files', 'courses.files'], (params, name) => {
 
         // Fix breadcrumbs
@@ -20,7 +20,9 @@ export default function ({ router, dom }) {
             let dashboardListItem = dashboardLink.parentNode;
 
             // Mark the account menu as expanded
-            document.body.classList.add('course-menu-expanded');
+            if (expandMyFilesMenu) {
+                document.body.classList.add('course-menu-expanded');
+            }
 
             // Fix for current active page in main navigation selection
             (new MutationObserver(() => {
@@ -62,7 +64,7 @@ export default function ({ router, dom }) {
 
                     // Insert the markup for the left side menu
                     document.getElementById('not_right_side').insertAdjacentHTML('beforebegin', `
-                        <div id="left-side" class="ic-app-course-menu list-view" style="display: block">
+                        <div id="left-side" class="ic-app-course-menu list-view" style="display: ${expandMyFilesMenu ? 'block' : 'none'}">
                             <nav role="navigation" aria-label="Menu Accountnavigatie">
                                 <ul id="section-tabs">
                                 </ul>

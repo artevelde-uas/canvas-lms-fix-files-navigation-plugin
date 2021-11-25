@@ -10,7 +10,8 @@
   "repository": "https://github.com/artevelde-uas/canvas-lms-fix-files-navigation-plugin",
   "module": "src/index.js",
   "files": [
-    "src/"
+    "src/",
+    "docs/"
   ],
   "peerDependencies": {
     "@artevelde-uas/canvas-lms-app": "^1.0.0"

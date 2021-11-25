@@ -46,13 +46,12 @@ Using Yarn:
 Just import the plug-in and add it to the Canvas app:
 
 ```javascript
-import canvas from '@artevelde-uas/canvas-lms-app';
+import { run, addPlugin } from '@artevelde-uas/canvas-lms-app';
 import fixFilesNavigationPlugin from '@artevelde-uas/canvas-lms-fix-files-navigation-plugin';
 
+addPlugin(fixFilesNavigationPlugin);
 
-canvas.addPlugin(fixFilesNavigationPlugin);
-
-canvas.run();
+run();
 ```
 
 ### Options

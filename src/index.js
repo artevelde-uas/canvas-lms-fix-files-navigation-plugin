@@ -1,5 +1,7 @@
+import { router, dom } from '@artevelde-uas/canvas-lms-app';
 
-export default function ({ router, dom }, { expandMyFilesMenu = true } = {}) {
+
+export default function ({ expandMyFilesMenu = true } = {}) {
     router.onRoute(['profile.files', 'groups.files', 'courses.files'], (params, name) => {
 
         // Fix breadcrumbs
@@ -97,6 +99,7 @@ export default function ({ router, dom }, { expandMyFilesMenu = true } = {}) {
                 });
             });
         }
-
     });
+    
+    return require('../package.json');
 }

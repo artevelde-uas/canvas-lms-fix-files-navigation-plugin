@@ -1,6 +1,6 @@
 {
   "name": "@artevelde-uas/canvas-lms-fix-files-navigation-plugin",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "description": "Fix some navigation issues on file explorer pages",
   "keywords": [
     "Canvas LMS"

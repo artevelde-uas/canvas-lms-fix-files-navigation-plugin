@@ -1,0 +1,26 @@
+{
+    "en": {
+        "package": {
+            "title": "Fix file explorer navigation",
+            "description": "Fix some navigation issues on file explorer pages (wrong active link on main navigation, missing profile menu, displaced breadcrumbs)."
+        }
+    },
+    "nl": {
+        "package": {
+            "title": "Verbetert de navigatie in de bestandsverkenner",
+            "description": "Lost enkele navigatieproblemen op pagina's van bestandsverkenners op (verkeerde actieve link in hoofdnavigatie, ontbrekend profielmenu, verplaatste broodkruimels)."
+        }
+    },
+    "fr": {
+        "package": {
+            "title": "Correction de la navigation dans l'explorateur de fichiers",
+            "description": "Corrige certains problèmes de navigation sur les pages de l'explorateur de fichiers (mauvais lien actif dans la navigation principale, menu de profil manquant, fil d'Ariane déplacé)."
+        }
+    },
+    "de": {
+        "package": {
+            "title": "Behebt die Datei-Explorer-Navigation",
+            "description": "Behebt einige Navigationsprobleme auf Datei-Explorer-Seiten (falscher aktiver Link in der Hauptnavigation, fehlendes Profilmenü, verschobene Breadcrumbs)."
+        }
+    }
+}

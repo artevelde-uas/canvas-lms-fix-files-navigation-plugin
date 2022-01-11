@@ -2,7 +2,7 @@ import { router, dom } from '@artevelde-uas/canvas-lms-app';
 
 
 export default function ({ expandMyFilesMenu = true } = {}) {
-    router.onRoute(['profile.files', 'groups.files', 'courses.files'], (params, name) => {
+    router.onRoute(['profile.files', 'groups.files', 'courses.files'], async (params, name) => {
 
         // Fix breadcrumbs
         dom.onElementReady('.ic-Layout-contentMain .ic-app-nav-toggle-and-crumbs--files').then(navToggleAndCrumbs => {
@@ -46,53 +46,51 @@ export default function ({ expandMyFilesMenu = true } = {}) {
             profileLink.click();
 
             // Wait for the links to render
-            dom.onElementReady('.profile-tray ul', { root: navigationTray }).then(profileTray => {
-                dom.onElementReady('li > div > a', { root: profileTray }).then(() => {
-                    const links = profileTray.querySelectorAll('li > div > a');
+            const profileTray = await dom.onElementReady('.profile-tray ul', { root: navigationTray });
+            await dom.onElementReady('li > div > a', { root: profileTray });
+            const links = profileTray.querySelectorAll('li > div > a');
 
-                    // Close the navigation tray
-                    profileLink.click();
+            // Close the navigation tray
+            profileLink.click();
 
-                    // Unhide the navigation tray after the transition
-                    setTimeout(() => {
-                        navigationTray.hidden = false;
-                    }, 1000);
+            // Unhide the navigation tray after the transition
+            setTimeout(() => {
+                navigationTray.hidden = false;
+            }, 1000);
 
-                    // Insert the markup for the left side menu
-                    document.getElementById('not_right_side').insertAdjacentHTML('beforebegin', `
-                        <div id="left-side" class="ic-app-course-menu ic-sticky-on list-view" style="display: ${expandMyFilesMenu ? 'block' : 'none'}">
-                            <div id="sticky-container" class="ic-sticky-frame has-scrollbar">
-                                <nav role="navigation" aria-label="Menu Accountnavigatie">
-                                    <ul id="section-tabs">
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    `);
+            // Insert the markup for the left side menu
+            document.getElementById('not_right_side').insertAdjacentHTML('beforebegin', `
+                <div id="left-side" class="ic-app-course-menu ic-sticky-on list-view" style="display: ${expandMyFilesMenu ? 'block' : 'none'}">
+                    <div id="sticky-container" class="ic-sticky-frame has-scrollbar">
+                        <nav role="navigation" aria-label="Menu Accountnavigatie">
+                            <ul id="section-tabs">
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            `);
 
-                    const sectionTabs = document.getElementById('section-tabs');
+            const sectionTabs = document.getElementById('section-tabs');
 
-                    // Loop over each link and generate menu item
-                    links.forEach(link => {
-                        const listItem = document.createElement('li');
-                        const anchor = document.createElement('a');
+            // Loop over each link and generate menu item
+            links.forEach(link => {
+                const listItem = document.createElement('li');
+                const anchor = document.createElement('a');
 
-                        listItem.className = 'section';
-                        anchor.href = link.getAttribute('href');
-                        anchor.title = link.textContent;
-                        anchor.tabIndex = 0;
-                        anchor.textContent = link.textContent;
+                listItem.className = 'section';
+                anchor.href = link.getAttribute('href');
+                anchor.title = link.textContent;
+                anchor.tabIndex = 0;
+                anchor.textContent = link.textContent;
 
-                        // Select the current active page
-                        if (link.href === window.location.href) {
-                            anchor.classList.add('files', 'active');
-                            anchor.setAttribute('aria-current', 'page');
-                        }
+                // Select the current active page
+                if (link.href === window.location.href) {
+                    anchor.classList.add('files', 'active');
+                    anchor.setAttribute('aria-current', 'page');
+                }
 
-                        listItem.appendChild(anchor);
-                        sectionTabs.appendChild(listItem);
-                    });
-                });
+                listItem.appendChild(anchor);
+                sectionTabs.appendChild(listItem);
             });
         }
     });

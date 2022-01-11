@@ -66,11 +66,13 @@ export default function ({ expandMyFilesMenu = true } = {}) {
 
                     // Insert the markup for the left side menu
                     document.getElementById('not_right_side').insertAdjacentHTML('beforebegin', `
-                        <div id="left-side" class="ic-app-course-menu list-view" style="display: ${expandMyFilesMenu ? 'block' : 'none'}">
-                            <nav role="navigation" aria-label="Menu Accountnavigatie">
-                                <ul id="section-tabs">
-                                </ul>
-                            </nav>
+                        <div id="left-side" class="ic-app-course-menu ic-sticky-on list-view" style="display: ${expandMyFilesMenu ? 'block' : 'none'}">
+                            <div id="sticky-container" class="ic-sticky-frame has-scrollbar">
+                                <nav role="navigation" aria-label="Menu Accountnavigatie">
+                                    <ul id="section-tabs">
+                                    </ul>
+                                </nav>
+                            </div>
                         </div>
                     `);
 

@@ -26,21 +26,15 @@ export default function ({ expandMyFilesMenu = true } = {}) {
                 document.body.classList.add('course-menu-expanded');
             }
 
-            // Fix for current active page in main navigation selection
-            (new MutationObserver(() => {
-                // Determine if dashboard link is selected
-                if (!dashboardListItem.classList.contains('ic-app-header__menu-list-item--active')) return;
-
+            // Fix wrongly selected dashboard link
+            dom.onClassAdded(dashboardListItem, (...attrs) => {
                 // Change selected item back to profile link
                 dashboardListItem.classList.remove('ic-app-header__menu-list-item--active');
                 dashboardListItem.removeAttribute('aria-current');
                 profileListItem.classList.add('ic-app-header__menu-list-item--active');
                 profileListItem.setAttribute('aria-current', 'page');
-
-            })).observe(dashboardListItem, {
-                attributes: true,
-                attributeFilter: ['aria-current'],
-                attributeOldValue: true
+            }, {
+                filter: 'ic-app-header__menu-list-item--active'
             });
 
             let navigationTray = document.getElementById('nav-tray-portal');

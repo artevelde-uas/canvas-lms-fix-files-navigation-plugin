@@ -60,6 +60,9 @@ export default function ({ expandMyFilesMenu = true } = {}) {
                 navigationTray.hidden = false;
             }, 1000);
 
+            // Indicate that left side is present
+            document.body.classList.add('with-left-side');
+
             // Insert the markup for the left side menu
             document.getElementById('not_right_side').insertAdjacentHTML('beforebegin', `
                 <div id="left-side" class="ic-app-course-menu ic-sticky-on list-view" style="display: ${expandMyFilesMenu ? 'block' : 'none'}">

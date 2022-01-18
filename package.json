@@ -15,5 +15,11 @@
   ],
   "peerDependencies": {
     "@artevelde-uas/canvas-lms-app": "^1.0.0"
+  },
+  "config": {
+    "scope": {
+      "account": true,
+      "course": true
+    }
   }
 }

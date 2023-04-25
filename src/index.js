@@ -29,7 +29,7 @@ export default function ({ expandMyFilesMenu = true } = {}) {
             }
 
             // Fix wrongly selected dashboard link
-            dom.onClassAdded(dashboardListItem, (...attrs) => {
+            dom.onClassAdded(dashboardListItem, () => {
                 // Change selected item back to profile link
                 dashboardListItem.classList.remove('ic-app-header__menu-list-item--active');
                 dashboardListItem.removeAttribute('aria-current');

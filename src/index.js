@@ -39,7 +39,8 @@ export default function ({ expandMyFilesMenu = true } = {}) {
                 filter: 'ic-app-header__menu-list-item--active'
             });
 
-            const navigationTray = document.getElementById('nav-tray-portal');
+            // Wait for the navigation tray to render
+            const navigationTray = await dom.onElementReady('#nav-tray-portal');
 
             // Temporarily hide the navigation tray
             navigationTray.hidden = true;
